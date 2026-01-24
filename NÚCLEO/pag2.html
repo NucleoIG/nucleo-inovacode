@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link rel="icon" type="image/png" href="ippl.png">
+    <meta property="og:title" content="InovaCode">
+    <meta property="og:description" content="WebSite do Núcleo De Informática do IPPLS">
+    <meta property="og:image" content="ippl.png">
+    <meta property="og:type" content="website"> 
+    <meta property="og:url" content="https://inovacode-nucleo.netlify.app">
+    <meta name="viewport" content="whidth=device-width,initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>InovaCode</title>
+
+    
+     
+    <link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<div class="QR"><img src="Qr.jpg" alt="QR-CODE"></div>
+<body>
+
+
+<div id="particles-js"></div>
+
+<div class="overlay">
+
+    <header class="top">
+        <h1 class="logo">InovaCode</h1>
+        <p>Núcleo de Informática</p>
+    </header>
+
+    <section class="cards">
+
+        <div class="card" onclick="conhecer()">
+                <i class="fas fa-network-wired"></i>
+                <h2>Conhecer o Núcleo</h2>
+           
+        </div>
+
+        <div class="card" onclick="objectivo()">
+            <i class="fas fa-bullseye"></i>
+            <h2>Objectivos do Núcleo</h2>
+        </div>
+
+        <div class="card" onclick="olimpiadas()">
+            <i class="fas fa-code"></i>
+            <h2>Olimpíadas de Programação</h2>
+        </div>
+
+        <div class="card admin" onclick="adm()">
+            <i class="fas fa-user-shield"></i>
+            <h2>Área Administrativa</h2>
+        </div>
+
+       <a href="index.html" class="voltar">
+        <i class="fas fa-arrow-left"></i>voltar
+       </a>
+
+    </section>
+
+    <div class="info" id="info">
+        <span onclick="fechar()">✖</span>
+        <div id="conteudo"></div>
+    </div>
+
+</div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script>
+
+
+function conhecer(){
+    window.location.href="pag3.html";
+
+}
+function objectivo(){
+    window.location.href="pag4.html";
+}
+function olimpiadas(){
+    window.location.href="pag5.html";
+}
+function adm(){
+    window.location.href="pag6.html";
+}
+
+/* PARTÍCULAS */
+particlesJS("particles-js", {
+    particles: {
+        number: { value: 70 },
+        color: { value: "#0004ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5 },
+        size: { value: 3 },
+        move: { speed: 2 }
+    }
+});
+
+function voltarpagina(){
+
+    windows.location.href="pag2.html";
+} 
+</script>
+
+</body>
+</html>
