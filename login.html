@@ -47,7 +47,7 @@ function login() {
     
   
     if (user === usuarioCorreto && pass === senhaCorreta) {
-      localStorage.setItem("logado", "sim");
+      localStorage.setItem("logado", "aluno");
       window.location.href = "pag2.html";
     } else {
       document.getElementById("msg").innerText = "Dados incorretos!";

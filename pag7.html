@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>InovaCode</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<header class="topo">
+  <h1><i class="fas fa-user-shield"></i> Publicação de Notícias</h1>
+</header>
+
+<main class="container">
+
+  <!-- CARD PUBLICAR NOTÍCIA -->
+  <section class="card noticias">
+    <h2><i class="fas fa-newspaper"></i> Publicar Notícia</h2>
+    <input type="text" id="titulo" placeholder="Título da notícia">
+    <input type="text" id="imagem" placeholder="URL da imagem (opcional)">
+    <textarea id="texto" placeholder="Texto da notícia"></textarea>
+    <button onclick="publicarNoticia()">📢 Publicar</button>
+  </section>
+
+  <!-- LISTA DE NOTÍCIAS -->
+  <section class="card lista">
+    <h2><i class="fas fa-list"></i> Notícias Publicadas</h2>
+    <div id="listaNoticias"></div>
+  </section>
+
+</main>
+
+<script src="admin.js"></script>
+<script>
+    function publicarNoticia() {
+  const titulo = document.getElementById("titulo").value.trim();
+  const imagem = document.getElementById("imagem").value.trim();
+  const texto = document.getElementById("texto").value.trim();
+
+  if (!titulo || !texto) {
+    alert("Preencha todos os campos!");
+    return;
+  }
+
+  const noticia = { titulo, imagem, texto };
+  let noticias = JSON.parse(localStorage.getItem("noticias")) || [];
+  noticias.push(noticia);
+  localStorage.setItem("noticias", JSON.stringify(noticias));
+
+  alert("Notícia publicada com sucesso!");
+  document.getElementById("titulo").value = "";
+  document.getElementById("imagem").value = "";
+  document.getElementById("texto").value = "";
+
+  mostrarNoticias(); // Atualiza a lista
+}
+
+// Mostrar notícias na página administrativa com botão excluir
+function mostrarNoticias() {
+  const lista = document.getElementById("listaNoticias");
+  if (!lista) return;
+
+  let noticias = JSON.parse(localStorage.getItem("noticias")) || [];
+  lista.innerHTML = ""; // limpa lista antes de preencher
+
+  noticias.forEach((n, index) => {
+    const div = document.createElement("div");
+    div.className = "noticia card neon";
+
+    div.innerHTML = `
+      <img src="${n.imagem || 'https://via.placeholder.com/300'}" alt="Notícia">
+      <h3>${n.titulo}</h3>
+      <p>${n.texto}</p>
+    `;
+
+    // Botão excluir apenas na área administrativa
+    const btnExcluir = document.createElement("button");
+    btnExcluir.className = "excluir";
+    btnExcluir.textContent = "🗑 Excluir";
+    btnExcluir.addEventListener("click", () => {
+      noticias.splice(index, 1); // remove do array
+      localStorage.setItem("noticias", JSON.stringify(noticias));
+      mostrarNoticias(); // atualiza a lista
+    });
+
+    div.appendChild(btnExcluir);
+    lista.appendChild(div);
+  });
+}
+
+// Carrega notícias automaticamente ao abrir a página
+document.addEventListener("DOMContentLoaded", mostrarNoticias);
+
+</script>
+</body>
+</html>

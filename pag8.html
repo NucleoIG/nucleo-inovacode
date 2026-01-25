@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>InovaCode</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <script src="noticias.js" defer></script>
+</head>
+<body>
+
+<h1 class="neon">📰 Notícias do Núcleo</h1>
+
+<div id="listaNoticias" class="container"></div>
+
+
+<script>
+    function publicarNoticia() {
+  const titulo = document.getElementById("titulo").value.trim();
+  const imagem = document.getElementById("imagem").value.trim();
+  const texto = document.getElementById("texto").value.trim();
+
+  if (!titulo || !texto) {
+    alert("Preencha todos os campos!");
+    return;
+  }
+
+  const noticia = { titulo, imagem, texto };
+  let noticias = JSON.parse(localStorage.getItem("noticias")) || [];
+  noticias.push(noticia);
+  localStorage.setItem("noticias", JSON.stringify(noticias));
+
+  alert("Notícia publicada com sucesso!");
+  document.getElementById("titulo").value = "";
+  document.getElementById("imagem").value = "";
+  document.getElementById("texto").value = "";
+
+  mostrarNoticias(); // Atualiza a lista
+}
+
+// Mostrar notícias na página administrativa com botão excluir
+function mostrarNoticias() {
+  const lista = document.getElementById("listaNoticias");
+  if (!lista) return;
+
+  let noticias = JSON.parse(localStorage.getItem("noticias")) || [];
+  lista.innerHTML = ""; // limpa lista antes de preencher
+
+  noticias.forEach((n, index) => {
+    const div = document.createElement("div");
+    div.className = "noticia card neon";
+
+    div.innerHTML = `
+      <img src="${n.imagem || 'https://via.placeholder.com/300'}" alt="Notícia">
+      <h3>${n.titulo}</h3>
+      <p>${n.texto}</p>
+    `;
+
+    // Botão excluir apenas na área administrativa
+    const btnExcluir = document.createElement("button");
+   
+    btnExcluir.addEventListener("click", () => {
+      noticias.splice(index, 1); // remove do array
+      localStorage.setItem("noticias", JSON.stringify(noticias));
+      mostrarNoticias(); // atualiza a lista
+    });
+
+    div.appendChild(btnExcluir);
+    lista.appendChild(div);
+  });
+}
+
+// Carrega notícias automaticamente ao abrir a página
+document.addEventListener("DOMContentLoaded", mostrarNoticias);
+
+</script>
+</body>
+</html>

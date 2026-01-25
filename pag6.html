@@ -47,8 +47,8 @@ function log() {
     
   
     if (user === usuarioCorreto && pass === senhaCorreta) {
-      localStorage.setItem("logado", "sim");
-      window.location.href = "pag7.html";
+      localStorage.setItem("logado", "admin");
+      window.location.href = "pag9.html";
     } else {
       document.getElementById("msg").innerText = "Dados incorretos!";
     }

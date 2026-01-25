@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Área Administrativa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+<div class="overlay"></div>
+
+<header class="topo">
+  <h1><i class="fas fa-user-shield"></i> Área Administrativa</h1>
+</header>
+
+<main class="container">
+
+  <!-- CARD GITHUB -->
+  <section class="card neon">
+    <h2><i class="fab fa-github"></i> GitHub</h2>
+    <p><strong>Email:</strong> gideaoquipipa20@gmail.com</p>
+    <p><strong>Palavra-passe:</strong> piano2025....</p>
+    <button onclick="mostrarInfo(this)">Mostrar</button>
+  </section>
+
+  <!-- CARD NETLIFY -->
+  <section class="card neon">
+    <h2><i class="fas fa-cloud-upload-alt"></i> Site</h2>
+    <p><strong>Nome do Site:</strong>inovacode</p>
+    <p><strong>Link:</strong>
+      <a href="#" target="_blank">https://nucleoig.github.io/nucleo-inovacode/</a>
+    </p>
+  </section>
+
+  <!-- REGRAS -->
+  <section class="card regras">
+    <h2><i class="fas fa-list-check"></i> Regras do Núcleo</h2>
+    <ul>
+      <li><i class="fas fa-lock"></i> Não alterar o site sem autorização</li>
+      <li><i class="fas fa-code"></i> Manter o código organizado</li>
+      <li><i class="fas fa-shield-alt"></i> Proteger dados e acessos</li>
+    </ul>
+  </section>
+
+  <!-- INFO ADM -->
+  <section class="card destaque">
+    <h2><i class="fas fa-star"></i> Administrador Principal</h2>
+    <p>Nós somos Responsáveis pela manutenção e segurança do site.</p>
+    <img src="ippl.png" alt="Administrador">
+
+    <a href="pag7.html" class="public">
+        <i class=""></i>Publicar Notícia
+       </a>
+  </section>
+
+</main>
+<script>
+function mostrarInfo(botao) {
+  if (botao.previousElementSibling.textContent.includes("********")) {
+    botao.previousElementSibling.textContent =
+      "Palavra-passe: (definida pelo administrador)";
+    botao.textContent = "Ocultar";
+  } else {
+    botao.previousElementSibling.textContent =
+      "Palavra-passe: ********";
+    botao.textContent = "Mostrar";
+  }
+}
+
+</script>
+</body>
+</html>
