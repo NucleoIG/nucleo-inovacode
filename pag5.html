@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link rel="icon" type="image/png" href="ippl.png">
+    <meta property="og:title" content="InovaCode">
+    <meta property="og:description" content="WebSite do Núcleo De Informática do IPPLS">
+    <meta property="og:image" content="ippl.png">
+    <meta property="og:type" content="website"> 
+    <meta property="og:url" content="https://inovacode-nucleo.netlify.app">
+    <meta name="viewport" content="whidth=device-width,initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>InovaCode</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="olimpiadas.js" defer></script>
+</head>
+<body>
+
+  <h1 class="neon">🏆 Olimpíadas de Programação 10ª</h1>
+  <p class="sub">Mostre suas habilidades em Programação e seja o Grande vencedor!</p>
+
+  <div class="olimpiadas-box">
+    
+    <div class="olimpiadas-imagem">
+      <img src="olimpiada.png" alt="img">
+    </div>
+
+    
+    <div class="olimpiadas-info">
+      <p><strong>Data:</strong> <span id="data">Por Anunciar...</span>
+        <button class="edit-btn" onclick="editar('data')"></button>
+      </p>
+      <p><strong>Prêmio:</strong> <span id="premio">Por Anunciar...</span>
+        <button class="edit-btn" onclick="editar('premio')"></button>
+      </p>
+      <p><strong>Frase motivadora:</strong> <span id="frase">“Desperte o Potencial que há em ti!”</span>
+        <button class="edit-btn" onclick="editar('frase')"></button>
+      </p>
+    </div>
+
+    
+    <button class="botao" onclick="showSurpresa()"> Surpresa!</button>
+
+   
+    <div id="animacao" class="animacao"></div>
+  </div>
+  
+
+  
+  <button class="voltar" onclick="window.location.href='pag2.html'">⬅ Voltar</button>
+
+  
+<script>
+    
+
+    function editar(campo) {
+      let valorAtual = document.getElementById(campo).innerText;
+      let novoValor = prompt("Edite o valor:", valorAtual);
+      if(novoValor !== null && novoValor.trim() !== "") {
+        document.getElementById(campo).innerText = novoValor;
+      }
+    }
+    
+    
+    function showSurpresa() {
+      const anim = document.getElementById("animacao");
+      anim.innerHTML = "";
+     
+      for(let i=0; i<50; i++){
+        const bolha = document.createElement("div");
+        bolha.style.position = "absolute";
+        bolha.style.width = Math.random()*25 + 20 + "px";
+        bolha.style.height = bolha.style.width;
+        bolha.style.background = "#0004ff";
+        bolha.style.borderRadius = "50%";
+        bolha.style.left = Math.random()*100 + "%";
+        bolha.style.bottom = "0px";
+        bolha.style.opacity = Math.random();
+        anim.appendChild(bolha);
+    
+        animarBola(bolha);
+      }
+    }
+    
+    function animarBola(bola) {
+      let altura = 0;
+      const velocidade = Math.random()*1 + 1;
+      const intervalo = setInterval(() => {
+        altura += velocidade;
+        bola.style.bottom = altura + "px";
+        if(altura > 100){
+          bola.remove();
+          clearInterval(intervalo);
+        }
+      }, 30);
+    }
+    
+
+    document.querySelectorAll(".olimpiadas-box span").forEach(span => {
+      span.addEventListener("mouseenter", () => {
+        span.style.textShadow = "0 0 10px #0004ff, 0 0 20px #0004ff, 0 0 30px #0004ff";
+      });
+      span.addEventListener("mouseleave", () => {
+        span.style.textShadow = "none";
+      });
+    });
+    </script>
+</body>
+
+</html>

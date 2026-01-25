@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <link rel="icon" type="image/png" href="ippl.png">
+  <meta property="og:title" content="InovaCode">
+  <meta property="og:description" content="WebSite do Núcleo De Informática do IPPLS">
+  <meta property="og:image" content="ippl.png">
+  <meta property="og:type" content="website"> 
+  <meta property="og:url" content="https://inovacode-nucleo.netlify.app">
+  <meta name="viewport" content="whidth=device-width,initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>InovaCode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<div class="QR"><img src="Qr.jpg" alt="QR-CODE"></div>
+<body>
+
+<div class="overlay">
+
+    <div class="box animated">
+        <h2>Login</h2>
+
+        <input type="text" id="user" placeholder="Nome" required>
+        <input type="password" id="pass" placeholder="Senha" required>
+
+        <button onclick="login()">Entrar</button>
+        <p id="msg"></p>
+
+        <p><a href=""></a><\></p>
+    </div>
+
+</div>
+<a href="index.html" class="voltar">
+    <i class="fas fa-arrow-left"></i>voltar
+   </a>
+   <p id="msg"></p>
+
+
+
+<script>
+function login() {
+    const usuarioCorreto = "IPPLS";
+    const senhaCorreta = "Nucleo2026";
+  
+    const user = document.getElementById("user").value;
+    const pass = document.getElementById("pass").value;
+    
+  
+    if (user === usuarioCorreto && pass === senhaCorreta) {
+      localStorage.setItem("logado", "sim");
+      window.location.href = "pag2.html";
+    } else {
+      document.getElementById("msg").innerText = "Dados incorretos!";
+    }
+  }
+</script>
+   
+
+
+</body>
+</html>

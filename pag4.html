@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link rel="icon" type="image/png" href="ippl.png">
+    <meta property="og:title" content="InovaCode">
+    <meta property="og:description" content="WebSite do Núcleo De Informática do IPPLS">
+    <meta property="og:image" content="ippl.png">
+    <meta property="og:type" content="website"> 
+    <meta property="og:url" content="https://inovacode-nucleo.netlify.app">
+    <meta name="viewport" content="whidth=device-width,initial-scale=1.0">
+  <meta charset="UTF-8">
+  <title>InovaCode</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="objetivos.js" defer></script>
+</head>
+<div class="QR"><img src="Qr.jpg" alt="QR-CODE"></div>
+<body>
+
+  <h1 class="neon">🎯 Objetivos do Núcleo</h1>
+
+  <div class="objetivos-container">
+    <div class="objetivo" onclick="showDetalhe(1)">
+      <div class="icone">💻</div>
+      <h3>Desenvolver Habilidades de Programação</h3>
+    </div>
+
+    <div class="objetivo" onclick="showDetalhe(2)">
+      <div class="icone">🌐</div>
+      <h3>Fortalecer Conhecimentos em Redes</h3>
+    </div>
+
+    <div class="objetivo" onclick="showDetalhe(3)">
+      <div class="icone">🤝</div>
+      <h3>Trabalho em Equipa</h3>
+    </div>
+
+    <div class="objetivo" onclick="showDetalhe(4)">
+      <div class="icone">🏆</div>
+      <h3>Preparar para Olimpíadas de Programação</h3>
+    </div>
+
+    <div class="objetivo" onclick="showDetalhe(5)">
+      <div class="icone">🎓</div>
+      <h3>Capacitação e Formação Contínua</h3>
+    </div>
+  </div>
+
+  <div id="detalhe" class="detalhe-box">
+    <p id="detalhe-texto"></p>
+    
+    <a href="pag2.html" class="voltar">
+        <i class="fas fa-arrow-left"></i>voltar
+       </a>
+  </div>
+
+
+<script>
+
+const detalhes = [
+  "", // índice 0 vazio para facilitar
+  "O Núcleo De Informática visa desenvolver as habilidades de programação dos alunos do IPPLS em várias linguagens, criando projetos práticos.",
+  "Fortalecer os conhecimentos em redes de computadores, segurança e configuração de sistemas, preparando para o mercado tecnológico Angolano.",
+  "Estimular o trabalho em equipe, comunicação e colaboração entre os membros do Núcleo.",
+  "Preparar os alunos para competições e olimpíadas de programação, com treinos e desafios práticos.",
+  "Promover capacitação contínua através de workshops, cursos e mentorias para todos os integrantes."
+];
+
+// Mostra detalhes do objetivo
+function showDetalhe(num){
+  document.getElementById("detalhe-texto").innerText = detalhes[num];
+  document.getElementById("detalhe").style.display = "block";
+}
+
+// Fecha o detalhe
+function fecharDetalhe(){
+  document.getElementById("detalhe").style.display = "none";
+}
+
+</script>
+</body>
+</html>
