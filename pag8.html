@@ -8,78 +8,45 @@
   <meta property="og:type" content="website"> 
   <meta property="og:url" content="https://inovacode-nucleo.netlify.app">
   <meta name="viewport" content="whidth=device-width,initial-scale=1.0">
-  <meta charset="UTF-8">
-  <title>InovaCode</title>
-  <link rel="stylesheet" href="noticia.css">
-  
-  <script src="noticias.js" defer></script>
+<meta charset="UTF-8">
+<title>Notícias do Núcleo</title>
+<link rel="stylesheet" href="noticia.css">
 </head>
 <body>
 
-<h1 class="neon">📰 Notícias do Núcleo</h1>
+<div class="container">
+  <h1 class="neo">📢 Notícias do Núcleo</h1>
 
-<div id="listaNoticias" class="container"></div>
-
+  <!-- Lista de notícias -->
+  <div id="listaNoticias"></div>
+</div>
 
 <script>
-    function publicarNoticia() {
-  const titulo = document.getElementById("titulo").value.trim();
-  const imagem = document.getElementById("imagem").value.trim();
-  const texto = document.getElementById("texto").value.trim();
-
-  if (!titulo || !texto) {
-    alert("Preencha todos os campos!");
-    return;
+  async function carregarNoticias() {
+  try {
+    const res = await fetch("noticias.json");
+    const noticias = await res.json();
+    mostrarNoticias(noticias);
+  } catch(err){
+    console.error("Erro ao carregar notícias:", err);
+    document.getElementById("listaNoticias").innerHTML = "<p>Não foi possível carregar as notícias.</p>";
   }
-
-  const noticia = { titulo, imagem, texto };
-  let noticias = JSON.parse(localStorage.getItem("noticias")) || [];
-  noticias.push(noticia);
-  localStorage.setItem("noticias", JSON.stringify(noticias));
-
-  alert("Notícia publicada com sucesso!");
-  document.getElementById("titulo").value = "";
-  document.getElementById("imagem").value = "";
-  document.getElementById("texto").value = "";
-
-  mostrarNoticias(); // Atualiza a lista
 }
 
-// Mostrar notícias na página administrativa com botão excluir
-function mostrarNoticias() {
+function mostrarNoticias(noticias){
   const lista = document.getElementById("listaNoticias");
-  if (!lista) return;
-
-  let noticias = JSON.parse(localStorage.getItem("noticias")) || [];
-  lista.innerHTML = ""; // limpa lista antes de preencher
-
-  noticias.forEach((n, index) => {
-    const div = document.createElement("div");
-    div.className = "noticia card neon";
-
-    div.innerHTML = `
-      <img src="${n.imagem || 'https://via.placeholder.com/300'}" alt="Notícia">
-      <h3>${n.titulo}</h3>
-      <p>${n.texto}</p>
+  lista.innerHTML = "";
+  noticias.forEach(n => {
+    lista.innerHTML += `
+      <div class="card">
+        <h3>${n.titulo}</h3>
+        <p>${n.conteudo}</p>
+      </div>
     `;
-
-    // Botão excluir apenas na área administrativa
-    const btnExcluir = document.createElement("button");
-   
-    btnExcluir.addEventListener("click", () => {
-      noticias.splice(index, 1); // remove do array
-      localStorage.setItem("noticias", JSON.stringify(noticias));
-      mostrarNoticias(); // atualiza a lista
-    });
-
-    div.appendChild(btnExcluir);
-    lista.appendChild(div);
   });
 }
 
-// Carrega notícias automaticamente ao abrir a página
-document.addEventListener("DOMContentLoaded", mostrarNoticias);
-
+carregarNoticias();
 </script>
 </body>
 </html>

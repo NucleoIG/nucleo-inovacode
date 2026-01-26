@@ -1,129 +1,111 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-  }
+* { margin:0; padding:0; box-sizing:border-box; }
+:root { --neo:#0004ff; --bg:#0a0f1c; --card:#111827; }
+
+body {
+  background-image: url(fundo.webp);
+  color:white;
+  font-family: Arial, sans-serif;
+  padding: 16px;
+  min-height: 100vh;
+  animation:float 3s ease-in-out infinite;
+}
+
+.container { max-width:1100px; margin:auto; }
+
+.neo {
+  text-align:center;
+  font-size:1.6rem;
+  color: var(--neo);
+  text-shadow:0 0 12px var(--neo);
+  margin-bottom: 20px;
   
-  body {
-    min-height: 100vh;
-    background: url("fundo.webp") no-repeat center/cover;
-    color: #fff;
-  }
-  
-  .overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.75);
-    z-index: -1;
-  }
-  
-  .topo {
-    text-align: center;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.6);
-    box-shadow: 0 0 15px #0004ff;
-  }
-  
-  .topo h1 {
-    color: #0004ff;
-    text-shadow: 0 0 10px #0004ff;
-  }
-  
-  .container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    padding: 30px;
-  }
-  
-  .card {
-    background: rgba(0, 0, 0, 0.65);
-    padding: 20px;
-    border-radius: 15px;
-    transition: transform 0.4s, box-shadow 0.4s;
-  }
-  
-  .card:hover {
-    transform: translateY(-8px) scale(1.02);
-  }
-  
-  .neon {
-    box-shadow: 0 0 20px #0004ff;
-  }
-  
-  .card h2, .card h3 {
-    color: #0004ff;
-    margin-bottom: 10px;
-    text-shadow: 0 0 8px #0004ff;
-  }
-  
-  .card p, .card li {
-    margin: 8px 0;
-    font-size: 15px;
-  }
-  
-  .card button {
-    
-   
-    background: transparent;
-    border: 1px solid #0004ff;
-    color:#0004ff;
-    border-radius: 8px;
-    transition: 0.3s;
-  }
-  
-  .card button:hover {
-    background: #0004ff;
-    color: #000;
-    box-shadow: 0 0 15px #0004ff;
-   
-  }
-  
-  /* Botão de excluir vermelho */
-  button.excluir {
-    border: 1px solid red;
-    color: red;
-    background: transparent;
-    border-radius: 8px;
-    padding: 6px 12px;
-  }
-  
-  button.excluir:hover {
-    background: red;
-    color: #000;
-    box-shadow: 0 0 15px red;
-  }
-  
-  /* Input e textarea para publicar notícias */
-  .card.noticias input, .card.noticias textarea {
-    width: 100%;
-    margin: 8px 0;
-    padding: 10px;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-  }
-  
-  .card.noticias button {
-    width: 100%;
-    padding: 10px;
-    margin-top: 10px;
-  }
-  
-  .noticia img {
-    width: 100%;
-    border-radius: 10px;
-    margin-bottom: 10px;
-  }
-  
-  /* Responsivo para celular */
-  @media (max-width: 600px) {
-    .container {
-      padding: 15px;
-    }
-  
-    .card {
-      text-align: center;
-    }
-  }
+}
+
+/* PAINEL ADMIN */
+#admPanel {
+  display:flex;
+  flex-direction:column;
+  margin-bottom:20px;
+}
+
+#admPanel input, #admPanel textarea {
+  margin-bottom:10px;
+  padding:10px;
+  border-radius:10px;
+  border:none;
+  outline:none;
+}
+
+#admPanel button {
+  background: var(--neo);
+  color:#000;
+  border:none;
+  border-radius:10px;
+  padding:10px;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+#admPanel button:hover {
+  transform: scale(1.05);
+  box-shadow:0 0 12px var(--neo);
+}
+
+/* CARDS DE NOTÍCIAS */
+.card {
+  background: var(--card);
+  border:1px solid var(--neo);
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:16px;
+  box-shadow:0 0 20px rgba(0,247,255,0.25);
+  animation:float 3s ease-in-out infinite;
+}
+
+.card h3 { color: var(--neo); margin-bottom:8px; }
+.card p { line-height:1.5; font-size:0.95rem; }
+
+/* BOTÃO EXCLUIR */
+.btnExcluir {
+  background:#e20202;
+  color:white;
+  border:none;
+  border-radius:10px;
+  padding:8px 12px;
+  cursor:pointer;
+  margin-top:8px;
+  transition:0.3s;
+}
+.btnExcluir:hover {
+  transform:scale(1.05);
+  box-shadow:0 0 10px #ff4d4d55;
+}
+
+/* RESPONSIVO TELEFONE */
+@media (max-width:480px){
+  .neo{ font-size:1.4rem; }
+  .card{ padding:12px; }
+  .btnExcluir{ width:100%; }
+  #admPanel input, #admPanel textarea, #admPanel button { width:100%; }
+}
+
+/* TABLET e PC */
+@media (min-width:600px){ .card{ display:flex; flex-direction:column; } }
+@media (min-width:992px){
+  .neo{ font-size:2rem; }
+  .card{ padding:20px; }
+}
+.voltar{
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+  background: transparent;
+  color: #0004ff;
+  border: 2px solid #0004ff;
+  padding: 10px 22px;
+  border-radius: 40px;
+  cursor: pointer;
+  font-size: 0.95em;
+  box-shadow: 0 0 15px #0004ff;
+  transition: 0.3s;
+}

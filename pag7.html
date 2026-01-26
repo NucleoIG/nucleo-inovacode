@@ -1,100 +1,86 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8">
-  <title>InovaCode</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="admin.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" type="image/png" href="ippl.png">
+  <meta property="og:title" content="InovaCode">
+  <meta property="og:description" content="WebSite do Núcleo De Informática do IPPLS">
+  <meta property="og:image" content="ippl.png">
+  <meta property="og:type" content="website"> 
+  <meta property="og:url" content="https://inovacode-nucleo.netlify.app">
+  <meta name="viewport" content="whidth=device-width,initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Administração de Notícias</title>
+<link rel="stylesheet" href="noticia.css">
 </head>
 <body>
 
-<div class="overlay"></div>
+<div class="container">
+  <h1 class="neo">🛠 Painel do Núcleo</h1>
 
-<header class="topo">
-  <h1><i class="fas fa-user-shield"></i> Publicação de Notícias</h1>
-</header>
+  <!-- Área para publicar notícia -->
+  <div id="admPanel">
+    <input type="text" id="tituloInput" placeholder="Título da notícia">
+    <textarea id="conteudoInput" placeholder="Conteúdo da notícia"></textarea>
+    <button id="btnAdd">➕ Publicar Notícia</button>
+  </div>
 
-<main class="container">
+  <h2>Notícias publicadas</h2>
+  <div id="listaNoticias"></div>
+  <button class="voltar" onclick="window.location.href='pag9.html'">⬅ Voltar</button>
+</div>
 
-  <!-- CARD PUBLICAR NOTÍCIA -->
-  <section class="card noticias">
-    <h2><i class="fas fa-newspaper"></i> Publicar Notícia</h2>
-    <input type="text" id="titulo" placeholder="Título da notícia">
-    <input type="text" id="imagem" placeholder="URL da imagem (opcional)">
-    <textarea id="texto" placeholder="Texto da notícia"></textarea>
-    <button onclick="publicarNoticia()">📢 Publicar</button>
-  </section>
-
-  <!-- LISTA DE NOTÍCIAS -->
-  <section class="card lista">
-    <h2><i class="fas fa-list"></i> Notícias Publicadas</h2>
-    <div id="listaNoticias"></div>
-  </section>
-
-</main>
-
-<script src="admin.js"></script>
 <script>
-    function publicarNoticia() {
-  const titulo = document.getElementById("titulo").value.trim();
-  const imagem = document.getElementById("imagem").value.trim();
-  const texto = document.getElementById("texto").value.trim();
+  let noticias = [];
 
-  if (!titulo || !texto) {
-    alert("Preencha todos os campos!");
-    return;
+async function carregarNoticias() {
+  try {
+    const res = await fetch("noticias.json");
+    noticias = await res.json();
+    mostrarNoticias();
+  } catch(err){
+    console.error("Erro ao carregar notícias:", err);
+    document.getElementById("listaNoticias").innerHTML = "<p>Não foi possível carregar as notícias.</p>";
   }
-
-  const noticia = { titulo, imagem, texto };
-  let noticias = JSON.parse(localStorage.getItem("noticias")) || [];
-  noticias.push(noticia);
-  localStorage.setItem("noticias", JSON.stringify(noticias));
-
-  alert("Notícia publicada com sucesso!");
-  document.getElementById("titulo").value = "";
-  document.getElementById("imagem").value = "";
-  document.getElementById("texto").value = "";
-
-  mostrarNoticias(); // Atualiza a lista
 }
 
-// Mostrar notícias na página administrativa com botão excluir
 function mostrarNoticias() {
   const lista = document.getElementById("listaNoticias");
-  if (!lista) return;
-
-  let noticias = JSON.parse(localStorage.getItem("noticias")) || [];
-  lista.innerHTML = ""; // limpa lista antes de preencher
-
-  noticias.forEach((n, index) => {
-    const div = document.createElement("div");
-    div.className = "noticia card neon";
-
-    div.innerHTML = `
-      <img src="${n.imagem || 'https://via.placeholder.com/300'}" alt="Notícia">
-      <h3>${n.titulo}</h3>
-      <p>${n.texto}</p>
+  lista.innerHTML = "";
+  noticias.forEach(n => {
+    lista.innerHTML += `
+      <div class="card">
+        <h3>${n.titulo}</h3>
+        <p>${n.conteudo}</p>
+        <button class="btnExcluir" onclick="excluirNoticia(${n.id})">❌ Excluir</button>
+      </div>
     `;
-
-    // Botão excluir apenas na área administrativa
-    const btnExcluir = document.createElement("button");
-    btnExcluir.className = "excluir";
-    btnExcluir.textContent = "🗑 Excluir";
-    btnExcluir.addEventListener("click", () => {
-      noticias.splice(index, 1); // remove do array
-      localStorage.setItem("noticias", JSON.stringify(noticias));
-      mostrarNoticias(); // atualiza a lista
-    });
-
-    div.appendChild(btnExcluir);
-    lista.appendChild(div);
   });
 }
 
-// Carrega notícias automaticamente ao abrir a página
-document.addEventListener("DOMContentLoaded", mostrarNoticias);
+function adicionarNoticia() {
+  const titulo = document.getElementById("tituloInput").value.trim();
+  const conteudo = document.getElementById("conteudoInput").value.trim();
+  if(titulo && conteudo){
+    noticias.push({ id: Date.now(), titulo, conteudo });
+    mostrarNoticias();
+    document.getElementById("tituloInput").value = "";
+    document.getElementById("conteudoInput").value = "";
+    alert("Notícia adicionada! Atualize o JSON no GitHub para que todos vejam.");
+  } else {
+    alert("Preencha título e conteúdo!");
+  }
+}
 
+function excluirNoticia(id){
+  noticias = noticias.filter(n => n.id !== id);
+  mostrarNoticias();
+  alert("Notícia excluída! Atualize o JSON no GitHub para que todos vejam.");
+}
+
+document.getElementById("btnAdd").addEventListener("click", adicionarNoticia);
+carregarNoticias();
 </script>
+
+
 </body>
 </html>
