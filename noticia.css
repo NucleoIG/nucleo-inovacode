@@ -7,7 +7,7 @@
   
   body {
     min-height: 100vh;
-    background: url("img/privacidade.jpg") no-repeat center/cover;
+    background: url("fundo.webp") no-repeat center/cover;
     color: #fff;
   }
   
@@ -22,12 +22,12 @@
     text-align: center;
     padding: 20px;
     background: rgba(0, 0, 0, 0.6);
-    box-shadow: 0 0 15px cyan;
+    box-shadow: 0 0 15px #0004ff;
   }
   
   .topo h1 {
-    color: cyan;
-    text-shadow: 0 0 10px cyan;
+    color: #0004ff;
+    text-shadow: 0 0 10px #0004ff;
   }
   
   .container {
@@ -49,13 +49,13 @@
   }
   
   .neon {
-    box-shadow: 0 0 20px #00ffff;
+    box-shadow: 0 0 20px #0004ff;
   }
   
   .card h2, .card h3 {
-    color: #00ffff;
+    color: #0004ff;
     margin-bottom: 10px;
-    text-shadow: 0 0 8px #00ffff;
+    text-shadow: 0 0 8px #0004ff;
   }
   
   .card p, .card li {
@@ -64,20 +64,20 @@
   }
   
   .card button {
-    margin-top: 10px;
-    padding: 8px 14px;
+    
+   
     background: transparent;
-    border: 1px solid cyan;
-    color: cyan;
-    cursor: pointer;
+    border: 1px solid #0004ff;
+    color:#0004ff;
     border-radius: 8px;
     transition: 0.3s;
   }
   
   .card button:hover {
-    background: cyan;
+    background: #0004ff;
     color: #000;
-    box-shadow: 0 0 15px cyan;
+    box-shadow: 0 0 15px #0004ff;
+   
   }
   
   /* Botão de excluir vermelho */
